@@ -42,7 +42,7 @@
 
 1. Клонируйте или скачайте репозиторий:
    git clone https://github.com/ryosothis/DentalClinic.git
-2. Откройте решение в Visual Studio
-3. Запустите приложение
+3. Откройте решение в Visual Studio
+4. Запустите приложение
    ```bash
    git clone https://github.com/ваш-username/kvio-dental-app.git
