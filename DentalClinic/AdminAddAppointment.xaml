@@ -1,0 +1,274 @@
+﻿<Page x:Class="DentalClinic.AdminAddAppointment"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d" 
+      Title="Admin Add Appointment" 
+      Height="Auto" 
+      Width="Auto"
+      MinHeight="600"
+      MinWidth="900">
+
+    <Page.Resources>
+        <!-- Стиль для кнопок админ-панели -->
+        <Style x:Key="AdminButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#244484"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="16,10"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" CornerRadius="10"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Margin="{TemplateBinding Padding}"
+                                              RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#1A366B"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#0F2444"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Стиль для секций -->
+        <Style x:Key="SectionStyle" TargetType="Border">
+            <Setter Property="Background" Value="#FFFFFF"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="BorderBrush" Value="#E1E8FF"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#B8BFD9" BlurRadius="12" ShadowDepth="3" Opacity="0.08"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Стиль для панелей навигации -->
+        <Style x:Key="NavPanelStyle" TargetType="StackPanel">
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <!-- Стиль для текстовых полей -->
+        <Style x:Key="AdminTextBox" TargetType="TextBox">
+            <Setter Property="Background" Value="#F8FBFF"/>
+            <Setter Property="Foreground" Value="#244484"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="BorderBrush" Value="#E1E8FF"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="BorderBrush" Value="#467EEA"/>
+                    <Setter Property="BorderThickness" Value="2"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Стиль для комбобоксов -->
+        <Style x:Key="AdminComboBox" TargetType="ComboBox">
+            <Setter Property="Background" Value="#F8FBFF"/>
+            <Setter Property="Foreground" Value="#244484"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="BorderBrush" Value="#E1E8FF"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <!-- Стиль для DatePicker -->
+        <Style x:Key="AdminDatePicker" TargetType="DatePicker">
+            <Setter Property="Background" Value="#F8FBFF"/>
+            <Setter Property="Foreground" Value="#244484"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="BorderBrush" Value="#E1E8FF"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="140"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Боковая панель Квио -->
+        <StackPanel Grid.Column="0" Background="#244484">
+            <StackPanel Orientation="Horizontal" Margin="18,26,0,16" VerticalAlignment="Top">
+                <TextBlock Text="Квио" Foreground="White" FontWeight="Bold" FontSize="26"/>
+                <Image Source="/logo.png" Width="32" Height="32" Margin="10,0,0,0"/>
+            </StackPanel>
+            <TextBlock Text="цифровая стоматология" Foreground="White" 
+                       Margin="18,-20,0,36" FontSize="9"/>
+            <StackPanel Margin="18,0,0,0">
+                <!-- Главная -->
+                <StackPanel x:Name="HomePanel" Style="{StaticResource NavPanelStyle}"
+                            MouseLeftButtonDown="HomePanel_MouseLeftButtonDown">
+                    <Image Source="/home.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                    <TextBlock Text="Главная" Foreground="White" FontSize="16" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- О клинике -->
+                <StackPanel x:Name="AboutPanel" Style="{StaticResource NavPanelStyle}"
+                            MouseLeftButtonDown="AboutPanel_MouseLeftButtonDown">
+                    <Image Source="/info.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                    <TextBlock Text="О клинике" Foreground="White" FontSize="16" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- Услуги -->
+                <StackPanel x:Name="ServicesPanel" Style="{StaticResource NavPanelStyle}"
+                            MouseLeftButtonDown="ServicesPanel_MouseLeftButtonDown">
+                    <Image Source="/services.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                    <TextBlock Text="Услуги" Foreground="White" FontSize="16" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- Цены -->
+                <StackPanel x:Name="PricePanel" Style="{StaticResource NavPanelStyle}"
+                            MouseLeftButtonDown="PricePanel_MouseLeftButtonDown">
+                    <Image Source="/price.png" Width="20" Height="20" Margin="0,5,10,0"/>
+                    <TextBlock Text="Цены" Foreground="White" FontSize="16" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- Профиль -->
+                <StackPanel x:Name="ProfilePanel" Style="{StaticResource NavPanelStyle}"
+                            MouseLeftButtonDown="ProfilePanel_MouseLeftButtonDown">
+                    <Image Source="/user.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                    <TextBlock Text="Профиль" Foreground="White" FontSize="16" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- Админ -->
+                <StackPanel x:Name="AdminPanel" Style="{StaticResource NavPanelStyle}"
+                            MouseLeftButtonDown="AdminPanel_MouseLeftButtonDown">
+                    <Image Source="/admin.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                    <TextBlock Text="Админ" Foreground="White" FontSize="16" VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="18,20,0,20" VerticalAlignment="Bottom">
+                <Image Source="/vk.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                <Image Source="/whatsapp.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                <Image Source="/tg.png" Width="20" Height="20"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Основной контент -->
+        <Border Grid.Column="1" Background="#F5F6FA">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <StackPanel Margin="20" MinWidth="800">
+                    <!-- Заголовок -->
+                    <TextBlock Text="Новая запись" 
+                               FontWeight="Bold" FontSize="28" 
+                               Foreground="#244484" 
+                               Margin="0,0,0,20"/>
+
+                    <!-- Форма добавления записи -->
+                    <Border Style="{StaticResource SectionStyle}">
+                        <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Левая колонка -->
+                                <StackPanel Grid.Column="0">
+                                    <!-- Пациент -->
+                                    <StackPanel Margin="0,0,0,15">
+                                        <TextBlock Text="Пациент *" 
+                                                   Foreground="#244484" 
+                                                   FontWeight="SemiBold"
+                                                   Margin="0,0,0,5"/>
+                                        <ComboBox x:Name="PatientComboBox"
+                                                  Style="{StaticResource AdminComboBox}"
+                                                  DisplayMemberPath="FullName"/>
+                                    </StackPanel>
+
+                                    <!-- Врач -->
+                                    <StackPanel Margin="0,0,0,15">
+                                        <TextBlock Text="Врач *" 
+                                                   Foreground="#244484" 
+                                                   FontWeight="SemiBold"
+                                                   Margin="0,0,0,5"/>
+                                        <ComboBox x:Name="DoctorComboBox"
+                                                  Style="{StaticResource AdminComboBox}"
+                                                  DisplayMemberPath="FullName"/>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <!-- Правая колонка -->
+                                <StackPanel Grid.Column="2">
+                                    <!-- Услуга -->
+                                    <StackPanel Margin="0,0,0,15">
+                                        <TextBlock Text="Услуга *" 
+                                                   Foreground="#244484" 
+                                                   FontWeight="SemiBold"
+                                                   Margin="0,0,0,5"/>
+                                        <ComboBox x:Name="ServiceComboBox"
+                                                  Style="{StaticResource AdminComboBox}"
+                                                  DisplayMemberPath="Name"/>
+                                    </StackPanel>
+
+                                    <!-- Дата и время -->
+                                    <StackPanel Margin="0,0,0,15">
+                                        <TextBlock Text="Дата и время *" 
+                                                   Foreground="#244484" 
+                                                   FontWeight="SemiBold"
+                                                   Margin="0,0,0,5"/>
+                                        <DatePicker x:Name="AppointmentDatePicker"
+                                                    Style="{StaticResource AdminDatePicker}"/>
+                                        <TextBox x:Name="TimeTextBox"
+                                                 Style="{StaticResource AdminTextBox}"
+                                                 Margin="0,5,0,0"
+                                                 Text="09:00"/>
+                                        <TextBlock Text="Формат: HH:mm (09:00, 14:30)" 
+                                                   Foreground="#828CA0" 
+                                                   FontSize="11"
+                                                   Margin="0,5,0,0"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+
+                            <!-- Кнопки действий -->
+                            <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
+                                <Button Content="Создать запись" 
+                                        Style="{StaticResource AdminButtonStyle}"
+                                        Background="#4CAF50"
+                                        Foreground="White"
+                                        Padding="20,12"
+                                        Click="CreateAppointmentButton_Click"/>
+                                <Button Content="Отмена" 
+                                        Style="{StaticResource AdminButtonStyle}"
+                                        Background="#E1E8FF"
+                                        Foreground="#244484"
+                                        Padding="20,12"
+                                        Margin="15,0,0,0"
+                                        Click="CancelButton_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</Page>

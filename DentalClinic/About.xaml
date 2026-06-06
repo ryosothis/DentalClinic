@@ -1,0 +1,331 @@
+﻿<Page x:Class="DentalClinic.About"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d" 
+      Title="About"  
+      Height="Auto" 
+      Width="Auto"
+      MinHeight="600"
+      MinWidth="800">
+
+    <Page.Resources>
+        <!-- Общий стиль для кнопок -->
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="10" 
+                                SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Margin="{TemplateBinding Padding}"
+                                              RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" TargetName="border" Value="0.92"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Opacity" TargetName="border" Value="0.85"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+
+        <!-- Стиль для кнопки записи -->
+        <Style x:Key="AboutButtonStyle" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Background" Value="#C9DEFF"/>
+            <Setter Property="Foreground" Value="#244484"/>
+            <Setter Property="Padding" Value="20,8"/>
+            <Setter Property="BorderBrush" Value="#C9DEFF"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0,15,0,0"/>
+        </Style>
+
+        <!-- Стиль для секций информации -->
+        <Style x:Key="InfoSectionStyle" TargetType="Border">
+            <Setter Property="Background" Value="#FFFFFF"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="BorderBrush" Value="#E1E8FF"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Margin" Value="0,0,0,15"/>
+        </Style>
+
+        <!-- Стиль для преимуществ -->
+        <Style x:Key="AdvantageItemStyle" TargetType="StackPanel">
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="Margin" Value="0,0,0,8"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <!-- Стиль для иконок преимуществ -->
+        <Style x:Key="AdvantageIconStyle" TargetType="Border">
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Background" Value="#E1E8FF"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
+        </Style>
+
+        <!-- Стиль для карточек врачей -->
+        <Style x:Key="DoctorCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="#FFFFFF"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="BorderBrush" Value="#E1E8FF"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="Margin" Value="0,0,10,10"/>
+            <Setter Property="Width" Value="140"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="140" MinWidth="120"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Боковая панель Квио -->
+        <StackPanel Grid.Column="0" Background="#244484">
+            <StackPanel Orientation="Horizontal" Margin="18,26,0,16" VerticalAlignment="Top">
+                <TextBlock Text="Квио" Foreground="White" FontWeight="Bold" FontSize="26"/>
+                <Image Source="/logo.png" Width="32" Height="32" Margin="10,0,0,0"/>
+            </StackPanel>
+            <TextBlock Text="цифровая стоматология" Foreground="White" 
+                       Margin="18,-20,0,36" FontSize="9"/>
+            <StackPanel Margin="18,0,0,0">
+                <StackPanel x:Name="HomePanel" Orientation="Horizontal" Margin="0,10,0,0" VerticalAlignment="Center" Cursor="Hand"
+                            MouseLeftButtonDown="HomePanel_MouseLeftButtonDown">
+                    <Image Source="/home.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                    <TextBlock Text="Главная" Foreground="White" FontSize="16" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel x:Name="AboutPanel" Orientation="Horizontal" Margin="0,10,0,0" VerticalAlignment="Center" Cursor="Hand"
+                            MouseLeftButtonDown="AboutPanel_MouseLeftButtonDown">
+                    <Image Source="/info.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                    <TextBlock Text="О клинике" Foreground="White" FontSize="16" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel x:Name="ServicesPanel" Orientation="Horizontal" Margin="0,10,0,0" VerticalAlignment="Center" Cursor="Hand"
+                            MouseLeftButtonDown="ServicesPanel_MouseLeftButtonDown">
+                    <Image Source="/services.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                    <TextBlock Text="Услуги" Foreground="White" FontSize="16" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel x:Name="PricePanel" Orientation="Horizontal" Margin="0,10,0,0" VerticalAlignment="Center" Cursor="Hand"
+                            MouseLeftButtonDown="PricePanel_MouseLeftButtonDown">
+                    <Image Source="/price.png" Width="20" Height="20" Margin="0,5,10,0"/>
+                    <TextBlock Text="Цены" Foreground="White" FontSize="16" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel x:Name="ProfilePanel" Orientation="Horizontal" Margin="0,10,0,0" VerticalAlignment="Center" Cursor="Hand"
+                            MouseLeftButtonDown="ProfilePanel_MouseLeftButtonDown">
+                    <Image Source="/user.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                    <TextBlock Text="Профиль" Foreground="White" FontSize="16" VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="18,20,0,20" VerticalAlignment="Bottom">
+                <Image Source="/vk.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                <Image Source="/whatsapp.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                <Image Source="/tg.png" Width="20" Height="20"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Основной контент -->
+        <Border Grid.Column="1" Background="#F5F6FA">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="15" MinWidth="600">
+                    <!-- Заголовок -->
+                    <TextBlock Text="О клинике" 
+                               FontWeight="Bold" 
+                               FontSize="24" 
+                               Foreground="#244484" 
+                               Margin="0,0,0,15"/>
+
+                    <!-- О клинике -->
+                    <Border Style="{StaticResource InfoSectionStyle}">
+                        <StackPanel>
+                            <TextBlock Text="Квио - цифровая стоматология" 
+                                       FontWeight="Bold" 
+                                       FontSize="16" 
+                                       Foreground="#244484" 
+                                       Margin="0,0,0,10"/>
+
+                            <TextBlock Text="Мы - современная стоматологическая клиника, которая сочетает в себе передовые технологии, высокий профессионализм и индивидуальный подход к каждому пациенту."
+                                       Foreground="#828CA0" 
+                                       FontSize="13"
+                                       TextWrapping="Wrap"
+                                       LineHeight="18"
+                                       Margin="0,0,0,8"/>
+
+                            <TextBlock Text="В работе используем цифровые технологии: внутриротовые сканеры, 3D-диагностику, CAD/CAM системы для максимальной точности результатов."
+                                       Foreground="#828CA0" 
+                                       FontSize="13"
+                                       TextWrapping="Wrap"
+                                       LineHeight="18"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Наши преимущества -->
+                    <Border Style="{StaticResource InfoSectionStyle}">
+                        <StackPanel>
+                            <TextBlock Text="Наши преимущества" 
+                                       FontWeight="Bold" 
+                                       FontSize="16" 
+                                       Foreground="#244484" 
+                                       Margin="0,0,0,10"/>
+
+                            <StackPanel>
+                                <StackPanel Style="{StaticResource AdvantageItemStyle}">
+                                    <Border Style="{StaticResource AdvantageIconStyle}">
+                                        <TextBlock Text="✓" 
+                                                   Foreground="#467EEA" 
+                                                   FontWeight="Bold"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   FontSize="10"/>
+                                    </Border>
+                                    <TextBlock Text="Цифровая диагностика" 
+                                               Foreground="#244484" 
+                                               FontSize="13"
+                                               VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                                <StackPanel Style="{StaticResource AdvantageItemStyle}">
+                                    <Border Style="{StaticResource AdvantageIconStyle}">
+                                        <TextBlock Text="✓" 
+                                                   Foreground="#467EEA" 
+                                                   FontWeight="Bold"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   FontSize="10"/>
+                                    </Border>
+                                    <TextBlock Text="Современное оборудование" 
+                                               Foreground="#244484" 
+                                               FontSize="13"
+                                               VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                                <StackPanel Style="{StaticResource AdvantageItemStyle}">
+                                    <Border Style="{StaticResource AdvantageIconStyle}">
+                                        <TextBlock Text="✓" 
+                                                   Foreground="#467EEA" 
+                                                   FontWeight="Bold"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   FontSize="10"/>
+                                    </Border>
+                                    <TextBlock Text="Опытные врачи" 
+                                               Foreground="#244484" 
+                                               FontSize="13"
+                                               VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                                <StackPanel Style="{StaticResource AdvantageItemStyle}">
+                                    <Border Style="{StaticResource AdvantageIconStyle}">
+                                        <TextBlock Text="✓" 
+                                                   Foreground="#467EEA" 
+                                                   FontWeight="Bold"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   FontSize="10"/>
+                                    </Border>
+                                    <TextBlock Text="Прозрачные цены" 
+                                               Foreground="#244484" 
+                                               FontSize="13"
+                                               VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Контакты и врачи в одной строке -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="200"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Наша команда -->
+                        <StackPanel Grid.Column="0">
+                            <Border Style="{StaticResource InfoSectionStyle}">
+                                <StackPanel>
+                                    <TextBlock Text="Наша команда" 
+                                               FontWeight="Bold" 
+                                               FontSize="16" 
+                                               Foreground="#244484" 
+                                               Margin="0,0,0,10"/>
+
+                                    <WrapPanel x:Name="DoctorsWrapPanel">
+                                        <!-- Карточки врачей будут добавляться динамически -->
+                                    </WrapPanel>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+
+                        <!-- Контакты -->
+                        <StackPanel Grid.Column="2">
+                            <Border Style="{StaticResource InfoSectionStyle}">
+                                <StackPanel>
+                                    <TextBlock Text="Контакты" 
+                                               FontWeight="Bold" 
+                                               FontSize="16" 
+                                               Foreground="#244484" 
+                                               Margin="0,0,0,10"/>
+
+                                    <StackPanel Margin="0,0,0,8">
+                                        <TextBlock Text="Адрес" 
+                                                   FontWeight="SemiBold" 
+                                                   FontSize="12" 
+                                                   Foreground="#244484"/>
+                                        <TextBlock Text="ул. Стоматологическая, д. 123" 
+                                                   Foreground="#828CA0" 
+                                                   FontSize="11"
+                                                   TextWrapping="Wrap"/>
+                                    </StackPanel>
+
+                                    <StackPanel Margin="0,0,0,8">
+                                        <TextBlock Text="Телефон" 
+                                                   FontWeight="SemiBold" 
+                                                   FontSize="12" 
+                                                   Foreground="#244484"/>
+                                        <TextBlock Text="+7 (999) 123-45-67" 
+                                                   Foreground="#828CA0" 
+                                                   FontSize="11"/>
+                                    </StackPanel>
+
+                                    <StackPanel Margin="0,0,0,8">
+                                        <TextBlock Text="Режим работы" 
+                                                   FontWeight="SemiBold" 
+                                                   FontSize="12" 
+                                                   Foreground="#244484"/>
+                                        <TextBlock Text="Пн-Пт: 9:00-21:00" 
+                                                   Foreground="#828CA0" 
+                                                   FontSize="11"/>
+                                        <TextBlock Text="Сб-Вс: 10:00-18:00" 
+                                                   Foreground="#828CA0" 
+                                                   FontSize="11"/>
+                                    </StackPanel>
+
+                                    <Button Content="Записаться" 
+                                            Style="{StaticResource AboutButtonStyle}"
+                                            Click="BookAppointmentButton_Click"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</Page>

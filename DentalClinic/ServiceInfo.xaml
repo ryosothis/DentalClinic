@@ -1,0 +1,245 @@
+﻿<Page x:Class="DentalClinic.ServiceInfo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d" 
+      Title="ServiceInfo"  
+      Height="Auto" 
+      Width="Auto"
+      MinHeight="600"
+      MinWidth="900">
+
+    <Page.Resources>
+        <!-- Общий стиль для кнопок -->
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="10" 
+                                SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Margin="{TemplateBinding Padding}"
+                                              RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" TargetName="border" Value="0.92"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Opacity" TargetName="border" Value="0.85"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+
+        <!-- Стиль для кнопки записи -->
+        <Style x:Key="ServiceButtonStyle" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Background" Value="#C9DEFF"/>
+            <Setter Property="Foreground" Value="#244484"/>
+            <Setter Property="Padding" Value="26,8"/>
+            <Setter Property="BorderBrush" Value="#C9DEFF"/>
+            <Setter Property="Width" Value="280"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
+        </Style>
+
+        <!-- Стиль для секций информации -->
+        <Style x:Key="InfoSectionStyle" TargetType="Border">
+            <Setter Property="Background" Value="#FFFFFF"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="BorderBrush" Value="#E1E8FF"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="25"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+        </Style>
+
+        <!-- Стиль для преимуществ -->
+        <Style x:Key="AdvantageItemStyle" TargetType="StackPanel">
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="Margin" Value="0,0,0,12"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <!-- Стиль для иконок преимуществ -->
+        <Style x:Key="AdvantageIconStyle" TargetType="Border">
+            <Setter Property="Width" Value="24"/>
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="Background" Value="#E1E8FF"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Margin" Value="0,0,12,0"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="140" MinWidth="120"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Боковая панель Квио -->
+        <StackPanel Grid.Column="0" Background="#244484">
+            <StackPanel Orientation="Horizontal" Margin="18,26,0,16" VerticalAlignment="Top">
+                <TextBlock Text="Квио" Foreground="White" FontWeight="Bold" FontSize="26"/>
+                <Image Source="/logo.png" Width="32" Height="32" Margin="10,0,0,0"/>
+            </StackPanel>
+            <TextBlock Text="цифровая стоматология" Foreground="White" 
+                       Margin="18,-20,0,36" FontSize="9"/>
+            <StackPanel Margin="18,0,0,0">
+                <StackPanel x:Name="HomePanel" Orientation="Horizontal" Margin="0,10,0,0" VerticalAlignment="Center" Cursor="Hand"
+                            MouseLeftButtonDown="HomePanel_MouseLeftButtonDown">
+                    <Image Source="/home.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                    <TextBlock Text="Главная" Foreground="White" FontSize="16" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel x:Name="AboutPanel" Orientation="Horizontal" Margin="0,10,0,0" VerticalAlignment="Center" Cursor="Hand"
+                            MouseLeftButtonDown="AboutPanel_MouseLeftButtonDown">
+                    <Image Source="/info.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                    <TextBlock Text="О клинике" Foreground="White" FontSize="16" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel x:Name="ServicesPanel" Orientation="Horizontal" Margin="0,10,0,0" VerticalAlignment="Center" Cursor="Hand"
+                            MouseLeftButtonDown="ServicesPanel_MouseLeftButtonDown">
+                    <Image Source="/services.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                    <TextBlock Text="Услуги" Foreground="White" FontSize="16" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel x:Name="PricePanel" Orientation="Horizontal" Margin="0,10,0,0" VerticalAlignment="Center" Cursor="Hand"
+                            MouseLeftButtonDown="PricePanel_MouseLeftButtonDown">
+                    <Image Source="/price.png" Width="20" Height="20" Margin="0,5,10,0"/>
+                    <TextBlock Text="Цены" Foreground="White" FontSize="16" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel x:Name="ProfilePanel" Orientation="Horizontal" Margin="0,10,0,0" VerticalAlignment="Center" Cursor="Hand"
+                            MouseLeftButtonDown="ProfilePanel_MouseLeftButtonDown">
+                    <Image Source="/user.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                    <TextBlock Text="Профиль" Foreground="White" FontSize="16" VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="18,20,0,20" VerticalAlignment="Bottom">
+                <Image Source="/vk.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                <Image Source="/whatsapp.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                <Image Source="/tg.png" Width="20" Height="20"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Основной контент -->
+        <Border Grid.Column="1" Background="#F5F6FA">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <StackPanel Margin="20" MinWidth="700">
+                    <!-- Прогресс бар для загрузки -->
+                    <ProgressBar x:Name="ProgressBar" 
+                                 Height="4" 
+                                 Margin="0,0,0,20" 
+                                 Visibility="Collapsed"
+                                 IsIndeterminate="True"
+                                 Foreground="#467EEA"/>
+
+                    <!-- Основной контент -->
+                    <StackPanel x:Name="MainContent">
+                        <!-- Основной заголовок -->
+                        <TextBlock x:Name="ServiceTitleText" 
+                                   Text="Информация о лечении" 
+                                   FontWeight="Bold" 
+                                   FontSize="28" 
+                                   Foreground="#244484" 
+                                   Margin="0,0,0,10"/>
+
+                        <!-- Название услуги -->
+                        <TextBlock x:Name="ServiceNameText" 
+                                   Text="Загрузка..." 
+                                   FontWeight="SemiBold" 
+                                   FontSize="20" 
+                                   Foreground="#467EEA" 
+                                   Margin="0,0,0,20"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" MinWidth="400"/>
+                                <ColumnDefinition Width="15"/>
+                                <ColumnDefinition Width="300" MaxWidth="350"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Левая колонка - основная информация -->
+                            <StackPanel Grid.Column="0">
+                                <!-- Описание услуги -->
+                                <Border Style="{StaticResource InfoSectionStyle}">
+                                    <StackPanel>
+                                        <TextBlock Text="Описание услуги" 
+                                                   FontWeight="Bold" 
+                                                   FontSize="18" 
+                                                   Foreground="#244484" 
+                                                   Margin="0,0,0,15"/>
+
+                                        <TextBlock x:Name="ServiceDescriptionText"
+                                                   Text="Загрузка описания..."
+                                                   Foreground="#828CA0" 
+                                                   FontSize="14"
+                                                   TextWrapping="Wrap"
+                                                   LineHeight="20"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <!-- Преимущества -->
+                                <Border Style="{StaticResource InfoSectionStyle}">
+                                    <StackPanel>
+                                        <TextBlock Text="Преимущества" 
+                                                   FontWeight="Bold" 
+                                                   FontSize="18" 
+                                                   Foreground="#244484" 
+                                                   Margin="0,0,0,15"/>
+
+                                        <StackPanel x:Name="AdvantagesStackPanel">
+                                            <!-- Преимущества будут добавляться динамически -->
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+
+                            <!-- Правая колонка - цена и запись -->
+                            <StackPanel Grid.Column="2">
+                                <!-- Блок с ценой -->
+                                <Border Style="{StaticResource InfoSectionStyle}">
+                                    <StackPanel>
+                                        <TextBlock Text="Стоимость услуги" 
+                                                   FontWeight="Bold" 
+                                                   FontSize="18" 
+                                                   Foreground="#244484" 
+                                                   Margin="0,0,0,15"/>
+
+                                        <TextBlock x:Name="ServicePriceText"
+                                                   Text="Загрузка..." 
+                                                   FontWeight="Bold" 
+                                                   FontSize="24" 
+                                                   Foreground="#467EEA" 
+                                                   HorizontalAlignment="Center"
+                                                   Margin="0,0,0,10"/>
+
+                                        <TextBlock Text="* Точная стоимость определяется после консультации" 
+                                                   Foreground="#828CA0" 
+                                                   FontSize="11"
+                                                   TextAlignment="Center"
+                                                   FontStyle="Italic"
+                                                   TextWrapping="Wrap"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <!-- Кнопка записи -->
+                                <Button Content="Записаться на прием" 
+                                        Style="{StaticResource ServiceButtonStyle}"
+                                        Click="BookAppointmentButton_Click"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</Page>
