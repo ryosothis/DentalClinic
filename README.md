@@ -44,5 +44,3 @@
    git clone https://github.com/ryosothis/DentalClinic.git
 3. Откройте решение в Visual Studio
 4. Запустите приложение
-   ```bash
-   git clone https://github.com/ваш-username/kvio-dental-app.git
