@@ -41,7 +41,7 @@
 ### Шаги для запуска
 
 1. Клонируйте или скачайте репозиторий:
-   git clone https://github.com/ваш-username/kvio-dental-app.git
+   git clone https://github.com/ryosothis/DentalClinic.git
 2. Откройте решение в Visual Studio
 3. Запустите приложение
    ```bash
