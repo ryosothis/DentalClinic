@@ -41,6 +41,7 @@
 ### Шаги для запуска
 
 1. Клонируйте или скачайте репозиторий:
+2. Откройте решение в Visual Studio
+3. Запустите приложение
+  ```bash
    git clone https://github.com/ryosothis/DentalClinic.git
-3. Откройте решение в Visual Studio
-4. Запустите приложение
